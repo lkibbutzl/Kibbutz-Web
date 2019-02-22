@@ -1,0 +1,15 @@
+{
+  "name": "kibbutz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass views/sass/main.scss views/css/style.css -w"
+  },
+  "author": "Albonix",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.9.3"
+  },
+  "dependencies": {}
+}

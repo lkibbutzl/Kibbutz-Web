@@ -1,0 +1,37 @@
+// Styling For The About Section in Index.html
+.section-about {
+  background-color: $color-grey-light-1;
+  padding-top: 20rem;
+  padding-bottom: 5rem;
+  margin-top: -20vh;
+  clip-path: polygon();
+}
+
+
+// Styling the login Modal
+.login {
+  background-image: linear-gradient(rgba($color-white, 0.9) 0%, rgba($color-white, 0.9) 100%), url(../img/computer-card.jpg);
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .5);
+  height: 45rem;
+  &-form {
+    width: 100%;
+    padding: 6rem;
+  }
+}
+
+// Styling the Register Modal
+.register {
+  background-image: linear-gradient(rgba($color-white, 0.9) 0%, rgba($color-white, 0.9) 100%), url(../img/computer-card.jpg);
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .5);
+  height: 51rem;
+  &-form {
+    width: 100%;
+    padding: 1rem 6rem;
+  }
+}
+
+

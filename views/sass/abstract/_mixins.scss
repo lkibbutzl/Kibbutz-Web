@@ -1,0 +1,51 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Added
+// Custom media queries for the responsive pages
+/*
+ $breakpoint - possible arguments
+ - phone(600px)
+ - tab(900px)
+ - laptop(1200px)
+ - desktop(1800+)
+ - By default it is(1200 - 1800px).
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone {
+    @media only screen and (max-width: 37.5em) {
+      @content
+    }
+
+    ; //600px
+  }
+
+  @if $breakpoint==tab {
+    @media only screen and (max-width: 56.25em) {
+      @content
+    }
+
+    ; //900px
+  }
+
+  @if $breakpoint==laptop {
+    @media only screen and (max-width: 75em) {
+      @content
+    }
+
+    ; //1200px
+  }
+
+  @if $breakpoint==desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content
+    }
+
+    ; //1800
+  }
+}
