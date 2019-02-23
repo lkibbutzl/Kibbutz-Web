@@ -2,14 +2,29 @@
   "name": "kibbutz",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "routes/app.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "compile:sass": "node-sass views/sass/main.scss views/css/style.css -w"
   },
-  "author": "Albonix",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lkibbutzl/Kibbutz-Web.git"
+  },
+  "author": "Rahul",
   "license": "ISC",
   "devDependencies": {
     "node-sass": "^4.9.3"
   },
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/lkibbutzl/Kibbutz-Web/issues"
+  },
+  "homepage": "https://github.com/lkibbutzl/Kibbutz-Web#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "body-parser": "^1.18.3"
+
+  }
 }
