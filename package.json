@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:sass": "node-sass views/sass/main.scss views/css/style.css -w",
-    "start": "app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
