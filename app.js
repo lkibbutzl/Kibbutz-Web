@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const engines = require('consolidate');
 const router = require("./routes/user.js")
 
+
 const app = express()
 
 
@@ -22,7 +23,7 @@ app.use(router)
 // const loggedIn = router.loggedIn
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT, (req, res) => {
+app.listen(PORT, () => {
   console.log('Server listening at port 3000.')
 })
 
@@ -32,5 +33,3 @@ app.get('/', (req, res) => {
   // console.log(router.loggedIn);
   res.render("./home.html")
 })
-
-

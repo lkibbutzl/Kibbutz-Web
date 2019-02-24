@@ -3,7 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
-
+const bcrypt = require('bcrypt')
 
 
 
@@ -22,10 +22,9 @@ function getConnection() {
 router.get('/user/:id', (req, res) => {
   console.log(req.params.id)
 
+
   const connection = getConnection()
-
   const userId = req.params.id
-
   const queryString = "SELECT * FROM users WHERE id = ?"
 
   connection.query(queryString, [userId], (err, rows, fields) => {
@@ -85,16 +84,17 @@ router.post('/register', (req, res) => {
   const name = req.body.name_register;
   const number = req.body.mobile_register
   const password = req.body.password_register
-  const confirmPassword = req.body.password_repeat_register
+  const hash = bcrypt.hashSync(password, 0)
+  console.log(bcrypt.compareSync(password, hash))
 
-  if ((password !== confirmPassword) || (number.length < 9 || number.length > 12)) {
+  if (number.length < 9 || number.length > 12) {
     res.send("Check your input details and try again.")
     res.end()
   } else {
-    const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
 
     connection = getConnection()
 
+    const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
     connection.query(queryString, [name, number, password], (err, results, fields) => {
       if (err) {
         console.log("Failed adding an user" + err);
@@ -102,6 +102,7 @@ router.post('/register', (req, res) => {
         return
       }
       console.log("Inserted a new user: ", results.insertId);
+      console.log("Hash Check: ", bcrypt.compareSync(password, hash))
       res.sendfile("views/register-success.html")
     })
   }
@@ -115,9 +116,30 @@ router.post('/login', (req, res) => {
   const number = req.body.number_login
   const password = req.body.password_login
 
-  console.log(number)
-  console.log(password);
-  res.send(number + password)
+
+  const connection = getConnection()
+  const queryString = 'SELECT * FROM users WHERE mobile = ?'
+
+  connection.query(queryString, number, (err, results, fields) => {
+    if (err) {
+      res.send(500)
+    } else {
+      // console.log(results)
+      if (results.length > 0) {
+        const truePassword = results[0].password
+        console.log(password);
+        // console.log(hashedPassword); // still Working on hashng
+        // console.log(bcrypt.compareSync(password, hashedPassword))
+        if (password === truePassword) {
+          console.log("Logged In Successfully");
+          res.sendfile("views/login-success.html")
+        }
+      }
+    }
+  })
+
+  // console.log(number)
+  // console.log(password);
 
 })
 
