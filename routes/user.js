@@ -97,6 +97,7 @@ router.post('/register', (req, res) => {
       return
     }
     console.log("Inserted a new user: ", results.insertId);
+    res.sendfile("views/register-success.html")
   })
 })
 
