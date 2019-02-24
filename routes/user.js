@@ -85,20 +85,28 @@ router.post('/register', (req, res) => {
   const name = req.body.name_register;
   const number = req.body.mobile_register
   const password = req.body.password_register
+  const confirmPassword = req.body.password_repeat_register
 
-  const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
+  if ((password !== confirmPassword) || (number.length < 9 || number.length > 12)) {
+    res.send("Check your input details and try again.")
+    res.end()
+  } else {
+    const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
 
-  connection = getConnection()
+    connection = getConnection()
 
-  connection.query(queryString, [name, number, password], (err, results, fields) => {
-    if (err) {
-      console.log("Failed adding an user" + err);
-      res.send(500)
-      return
-    }
-    console.log("Inserted a new user: ", results.insertId);
-    res.sendfile("views/register-success.html")
-  })
+    connection.query(queryString, [name, number, password], (err, results, fields) => {
+      if (err) {
+        console.log("Failed adding an user" + err);
+        res.send(500)
+        return
+      }
+      console.log("Inserted a new user: ", results.insertId);
+      res.sendfile("views/register-success.html")
+    })
+  }
+
+
 })
 
 router.post('/login', (req, res) => {

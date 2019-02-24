@@ -169,8 +169,8 @@
               </div>
 
               <div class="forms-group">
-                <input type="number" class="forms-input" placeholder="Mobile Number" id="mobile_register" name="mobile_register"
-                  required>
+                <input type="text" class="forms-input" placeholder="Mobile Number" id="mobile_register" name="mobile_register"
+                  pattern="[6789][0-9]{9}" required>
                 <label for="mobile_register" class="forms-label">Moblie Number</label>
               </div>
 
@@ -200,5 +200,20 @@
     </div>
   </div>
 </body>
+<script>
+  var password = document.getElementById("password_register"),
+    confirmPassword = document.getElementById("password_repeat_register");
+
+  function validatePassword() {
+    if (password.value != confirmPassword.value) {
+      confirmPassword.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirmPassword.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirmPassword.onkeyup = validatePassword;
+</script>
 
 </html>
