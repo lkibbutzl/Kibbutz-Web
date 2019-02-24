@@ -26,6 +26,8 @@
     "body-parser": "^1.18.3",
     "consolidate": "^0.15.1",
     "express": "^4.16.4",
+    "express-handlebars": "^3.0.1",
+    "hbs": "^4.0.2",
     "morgan": "^1.9.1",
     "mustache": "^3.0.1",
     "mysql": "^2.16.0"

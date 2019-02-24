@@ -60,7 +60,6 @@ router.get('/users', (req, res) => {
     if (err) {
       console.log("Query Failed");
       res.sendStatus(500);
-      res.end();
     }
 
     const users = rows.map((row) => {
@@ -86,26 +85,39 @@ router.post('/register', (req, res) => {
   const password = req.body.password_register
   const hash = bcrypt.hashSync(password, 0)
   console.log(bcrypt.compareSync(password, hash))
+  const connection = getConnection()
+  const numberExistsCheckQuery = 'SELECT * FROM users WHERE mobile = ?'
 
-  if (number.length < 9 || number.length > 12) {
-    res.send("Check your input details and try again.")
-    res.end()
-  } else {
+  connection.query(numberExistsCheckQuery, number, (err, results, fields) => {
+    if (err) {
+      res.sendStatus(500)
+    } else {
+      if (results.length > 0) {
+        res.render("./success-fail.hbs", {
+          message: "User already exists.",
+          button: "Try logging in",
+          link: "/#login"
+        })
+      } else {
 
-    connection = getConnection()
-
-    const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
-    connection.query(queryString, [name, number, password], (err, results, fields) => {
-      if (err) {
-        console.log("Failed adding an user" + err);
-        res.send(500)
-        return
+        const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
+        connection.query(queryString, [name, number, password], (err, results, fields) => {
+          if (err) {
+            console.log("Failed adding an user" + err);
+            res.send(500)
+            return
+          }
+          console.log("Inserted a new user: ", results.insertId);
+          console.log("Hash Check: ", bcrypt.compareSync(password, hash))
+          res.render("./success-fail.hbs", {
+            message: "Registered successfully",
+            button: "Home",
+            link: "/user.html"
+          })
+        })
       }
-      console.log("Inserted a new user: ", results.insertId);
-      console.log("Hash Check: ", bcrypt.compareSync(password, hash))
-      res.sendfile("views/register-success.html")
-    })
-  }
+    }
+  })
 
 
 })
@@ -132,8 +144,24 @@ router.post('/login', (req, res) => {
         // console.log(bcrypt.compareSync(password, hashedPassword))
         if (password === truePassword) {
           console.log("Logged In Successfully");
-          res.sendfile("views/login-success.html")
+          res.render("./success-fail.hbs", {
+            message: "Logged In successfully",
+            button: "Home",
+            link: "/user.html"
+          })
+        } else {
+          res.render("./success-fail.hbs", {
+            message: "Check your password",
+            button: "Login here",
+            link: "/#login"
+          })
         }
+      } else {
+        res.render("./success-fail.hbs", {
+          message: "Seems you are not registered",
+          button: "Register here",
+          link: "/#register"
+        })
       }
     }
   })
