@@ -1,37 +1,36 @@
 const express = require('express')
-const app = express()
-const morgan = require("morgan")
-// const mysql = require("mysql")
-const bodyParser = require("body-parser")
+const morgan = require('morgan')
+const mysql = require('mysql')
+const bodyParser = require('body-parser')
+const engines = require('consolidate');
 const router = require("./routes/user.js")
 
+const app = express()
 
+
+app.set('views', __dirname + '/views');
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
+
+app.use(express.static(__dirname + "/views"))
 app.use(morgan('combined'))
-app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.urlencoded({
   extended: false
 }))
-
 app.use(router)
 
-app.get("/", (req, res) => {
-  console.log("Root Route")
-  res.render("index.html")
-})
-
-
+// const loggedIn = router.loggedIn
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => {
-  console.log("Server is listening on port 3000.");
+app.listen(PORT, (req, res) => {
+  console.log('Server listening at port 3000.')
 })
 
-// function getConnection() {
-//   return mysql.createConnection({
-//     host: 'localhost',
-//     user: 'rahul',
-//     password: 'Rahul@16roman',
-//     database: 'kibbutz'
-//   })
 
-// }
+app.get('/', (req, res) => {
+  console.log("Root Route")
+  // console.log(router.loggedIn);
+  res.render("./home.html")
+})
+
+

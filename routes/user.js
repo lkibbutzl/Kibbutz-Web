@@ -4,6 +4,9 @@ const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
 
+
+
+
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'us-cdbr-iron-east-03.cleardb.net',
@@ -74,7 +77,9 @@ router.get('/users', (req, res) => {
 })
 
 
+
 router.post('/register', (req, res) => {
+
   console.log('Creating a new User!')
 
   const name = req.body.name_register;
@@ -92,8 +97,19 @@ router.post('/register', (req, res) => {
       return
     }
     console.log("Inserted a new user: ", results.insertId);
-    res.send("Successfully Registered in Kibbutz")
   })
+})
+
+router.post('/login', (req, res) => {
+  console.log("Checking if the User's info is valid")
+
+  const number = req.body.number_login
+  const password = req.body.password_login
+
+  console.log(number)
+  console.log(password);
+  res.send(number + password)
+
 })
 
 module.exports = router
