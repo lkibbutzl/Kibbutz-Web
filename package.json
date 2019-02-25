@@ -1,7 +1,7 @@
 {
   "name": "kibbutz",
   "version": "1.0.0",
-  "description": "",
+  "description": "An interactive application for farmers.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,8 +28,11 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.1",
     "hbs": "^4.0.2",
+    "jsonwebtoken": "^8.5.0",
     "morgan": "^1.9.1",
     "mustache": "^3.0.1",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "newsapi": "^2.4.0",
+    "request": "^2.88.0"
   }
 }

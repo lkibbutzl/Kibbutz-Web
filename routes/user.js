@@ -19,22 +19,22 @@ function getConnection() {
   return pool
 }
 
-router.get('/user/:id', (req, res) => {
-  console.log(req.params.id)
+router.get('/user/:mobile', (req, res) => {
+  // console.log(req.params.id)
 
 
   const connection = getConnection()
-  const userId = req.params.id
-  const queryString = "SELECT * FROM users WHERE id = ?"
+  const userMobile = req.params.mobile
+  const queryString = "SELECT * FROM users WHERE mobile = ?"
 
-  connection.query(queryString, [userId], (err, rows, fields) => {
+  connection.query(queryString, [userMobile], (err, rows, fields) => {
     if (err) {
       console.log("Query Failed");
       res.sendStatus(500);
       res.end();
     }
 
-    const users = rows.map((row) => {
+    const user = rows.map((row) => {
       return {
         Name: row.name,
         mobile: row.mobile
@@ -42,7 +42,7 @@ router.get('/user/:id', (req, res) => {
     })
 
     console.log('Fetched');
-    res.json(users)
+    res.json(user)
   })
 })
 
@@ -75,100 +75,96 @@ router.get('/users', (req, res) => {
 })
 
 
+// router.post('/register', (req, res) => {
 
-router.post('/register', (req, res) => {
+//   console.log('Creating a new User!')
 
-  console.log('Creating a new User!')
+//   const name = req.body.name_register;
+//   const number = req.body.mobile_register
+//   const password = req.body.password_register
+//   const hash = bcrypt.hashSync(password, 0)
+//   console.log(bcrypt.compareSync(password, hash))
+//   const connection = getConnection()
+//   const numberExistsCheckQuery = 'SELECT * FROM users WHERE mobile = ?'
 
-  const name = req.body.name_register;
-  const number = req.body.mobile_register
-  const password = req.body.password_register
-  const hash = bcrypt.hashSync(password, 0)
-  console.log(bcrypt.compareSync(password, hash))
-  const connection = getConnection()
-  const numberExistsCheckQuery = 'SELECT * FROM users WHERE mobile = ?'
+//   connection.query(numberExistsCheckQuery, number, (err, results, fields) => {
+//     if (err) {
+//       res.sendStatus(500)
+//     } else {
+//       if (results.length > 0) {
+//         res.render("./success-fail.hbs", {
+//           message: "User already exists.",
+//           button: "Try logging in",
+//           link: "/#login"
+//         })
+//       } else {
 
-  connection.query(numberExistsCheckQuery, number, (err, results, fields) => {
-    if (err) {
-      res.sendStatus(500)
-    } else {
-      if (results.length > 0) {
-        res.render("./success-fail.hbs", {
-          message: "User already exists.",
-          button: "Try logging in",
-          link: "/#login"
-        })
-      } else {
-
-        const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
-        connection.query(queryString, [name, number, password], (err, results, fields) => {
-          if (err) {
-            console.log("Failed adding an user" + err);
-            res.send(500)
-            return
-          }
-          console.log("Inserted a new user: ", results.insertId);
-          console.log("Hash Check: ", bcrypt.compareSync(password, hash))
-          res.render("./success-fail.hbs", {
-            message: "Registered successfully",
-            button: "Home",
-            link: "/user.html"
-          })
-        })
-      }
-    }
-  })
-
-
-})
-
-router.post('/login', (req, res) => {
-  console.log("Checking if the User's info is valid")
-
-  const number = req.body.number_login
-  const password = req.body.password_login
+//         const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
+//         connection.query(queryString, [name, number, password], (err, results, fields) => {
+//           if (err) {
+//             console.log("Failed adding an user" + err);
+//             res.send(500)
+//             return
+//           }
+//           console.log("Inserted a new user: ", results.insertId);
+//           console.log("Hash Check: ", bcrypt.compareSync(password, hash))
+//           // loggedIn = true
+//           res.render("./success-fail.hbs", {
+//             message: "Registered successfully",
+//             button: "Home",
+//             link: "/user.html"
+//           })
+//         })
+//       }
+//     }
+//   })
+// })
 
 
-  const connection = getConnection()
-  const queryString = 'SELECT * FROM users WHERE mobile = ?'
+// router.post('/login', (req, res) => {
+//   console.log("Checking if the User's info is valid")
 
-  connection.query(queryString, number, (err, results, fields) => {
-    if (err) {
-      res.send(500)
-    } else {
-      // console.log(results)
-      if (results.length > 0) {
-        const truePassword = results[0].password
-        console.log(password);
-        // console.log(hashedPassword); // still Working on hashng
-        // console.log(bcrypt.compareSync(password, hashedPassword))
-        if (password === truePassword) {
-          console.log("Logged In Successfully");
-          res.render("./success-fail.hbs", {
-            message: "Logged In successfully",
-            button: "Home",
-            link: "/user.html"
-          })
-        } else {
-          res.render("./success-fail.hbs", {
-            message: "Check your password",
-            button: "Login here",
-            link: "/#login"
-          })
-        }
-      } else {
-        res.render("./success-fail.hbs", {
-          message: "Seems you are not registered",
-          button: "Register here",
-          link: "/#register"
-        })
-      }
-    }
-  })
+//   const number = req.body.number_login
+//   const password = req.body.password_login
 
-  // console.log(number)
-  // console.log(password);
 
-})
+//   const connection = getConnection()
+//   const queryString = 'SELECT * FROM users WHERE mobile = ?'
 
+//   connection.query(queryString, number, (err, results, fields) => {
+//     if (err) {
+//       res.send(500)
+//     } else {
+//       // console.log(results)
+//       if (results.length > 0) {
+//         const truePassword = results[0].password
+//         console.log(password);
+//         // console.log(hashedPassword); // still Working on hashng
+//         // console.log(bcrypt.compareSync(password, hashedPassword))
+//         if (password === truePassword) {
+//           console.log("Logged In Successfully");
+//           res.render("./success-fail.hbs", {
+//             message: "Logged In successfully",
+//             button: "Home",
+//             link: "/user.html"
+//           })
+//         } else {
+//           res.render("./success-fail.hbs", {
+//             message: "Check your password",
+//             button: "Login here",
+//             link: "/#login"
+//           })
+//         }
+//       } else {
+//         res.render("./success-fail.hbs", {
+//           message: "Seems you are not registered",
+//           button: "Register here",
+//           link: "/#register"
+//         })
+//       }
+//     }
+//   })
+// })
+
+// module.exports = loggedIn
 module.exports = router
