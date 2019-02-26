@@ -87,7 +87,7 @@ app.post('/register', (req, res) => {
           res.render("./success-fail.hbs", {
             message: "Registered successfully",
             button: "Home",
-            link: "/"
+            link: "/user.html"
           })
         })
       }
@@ -121,7 +121,7 @@ app.post('/login', (req, res) => {
           res.render("./success-fail.hbs", {
             message: "Logged In successfully",
             button: "Home",
-            link: "/"
+            link: "/user.html"
           })
         } else {
           res.render("./success-fail.hbs", {
