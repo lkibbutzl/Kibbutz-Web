@@ -9,8 +9,6 @@ const exphbs = require('express-handlebars');
 
 const app = express()
 
-var loggedIn = false
-
 const hbs = exphbs.create({
   /* config */
 });
@@ -25,7 +23,6 @@ app.use(bodyParser.urlencoded({
 app.use(userRouter)
 app.use(newsRouter)
 
-// const loggedIn = router.loggedIn
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
@@ -35,12 +32,7 @@ app.listen(PORT, () => {
 
 app.get('/', (req, res) => {
   console.log("Root Route")
-  console.log(loggedIn);
-  if (loggedIn) {
-    res.render("./user.hbs")
-  } else {
-    res.render("./home.hbs")
-  }
+  res.render("./home.hbs")
 })
 
 
@@ -92,7 +84,6 @@ app.post('/register', (req, res) => {
           }
           console.log("Inserted a new user: ", results.insertId);
           console.log("Hash Check: ", bcrypt.compareSync(password, hash))
-          loggedIn = true
           res.render("./success-fail.hbs", {
             message: "Registered successfully",
             button: "Home",
@@ -127,7 +118,6 @@ app.post('/login', (req, res) => {
         // console.log(bcrypt.compareSync(password, hashedPassword))
         if (password === truePassword) {
           console.log("Logged In Successfully");
-          loggedIn = true
           res.render("./success-fail.hbs", {
             message: "Logged In successfully",
             button: "Home",
@@ -158,4 +148,3 @@ app.post('/login', (req, res) => {
 // app.engine('html', engines.mustache);
 // app.set('view engine', 'html');
 // app.engine('.hbs', exphbs({extname: '.hbs'}));
-
