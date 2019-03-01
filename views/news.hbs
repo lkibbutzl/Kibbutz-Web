@@ -44,15 +44,16 @@
 
     <ul class="collection">
       {{#each result}}
+
       <li class="collection-item avatar">
         <div class="row">
 
-          <div class="col s2">
-            <img src={{this.urlToImage}} style="width:100px;height:100px;"></img>
+          <div class="col s12 m6 l3">
+            <img src={{this.urlToImage}} style="width:auto;height:100px;"></img>
           </div>
 
-          <div class="col s10">
-            <h1>{{this.title}}</h1>
+          <div class="col s12 m6 l9">
+            <h2 style="margin-top:0%">{{this.title}}</h2>
             <p>{{this.description}}</p>
             <a href={{this.url}} class="secondary-content">more...</a>
           </div>
