@@ -18,15 +18,12 @@
   <main>
     <nav>
       <div class="navbar navbar-fixed green nav-wrapper">
-        <a href="user.html" class="brand-logo">
-          <!-- <h1>News Feed</h1> -->
-          <!-- <img src="img/spinner.gif" alt="Logo">  -->
-        </a>
-        <ul id="nav-mobile" class="left">
+        <a href="/news" class="brand-logo">&#160;&#160;News</a>
+        <!-- <ul id="nav-mobile" class="left">
           <li>
             <h3>&#160;&#160;News</h3>
           </li>
-        </ul>
+        </ul> -->
         <ul id="nav-mobile" class="right">
           <li>
             <a href=" # ">About</a>
@@ -44,16 +41,15 @@
 
     <ul class="collection">
       {{#each result}}
-
       <li class="collection-item avatar">
         <div class="row">
 
-          <div class="col s12 m5 l3">
+          <div class="col s12 m6 l3">
             <img src={{this.urlToImage}} style="width:auto;height:100px;"></img>
           </div>
 
-          <div class="col s12 m7 l9">
-            <h2 style="margin-top:2%">{{this.title}}</h2>
+          <div class="col s12 m6 l9">
+            <h2 style="margin-top:0%">{{this.title}}</h2>
             <p>{{this.description}}</p>
             <a href={{this.url}} class="secondary-content">more...</a>
           </div>
