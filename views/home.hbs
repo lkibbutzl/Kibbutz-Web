@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="css/icon-font.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" type="image/png" href="img/spinner.gif">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <title>Kibbutz</title>
 </head>
 
@@ -31,7 +31,12 @@
       <a href="#register" class="butn butn-orange butn-animated">Register</a>
       &#160; &#160;
       <a href="#login" class="butn butn-white butn-animated">Login</a>
+
     </div>
+    <div id="ytWidget"></div>
+    <script
+      src="https://translate.yandex.net/website-widget/v1/widget.js?widgetId=ytWidget&pageLang=en&widgetTheme=light&autoMode=false"
+      type="text/javascript"></script>
   </header>
   <main>
     <section class="section-about">
@@ -133,14 +138,14 @@
               <div class="forms-group">
 
                 <a href="#header" class="popup-close">&times;</a>
-                <input type="number" class="forms-input" placeholder="Mobile Number" id="number_login" name="number_login"
-                  required>
+                <input type="number" class="forms-input" placeholder="Mobile Number" id="number_login"
+                  name="number_login" required>
                 <label for="number_login" class="forms-label">Mobile Number</label>
               </div>
 
               <div class="forms-group">
-                <input type="password" class="forms-input" placeholder="Password" id="password_login" name="password_login"
-                  required>
+                <input type="password" class="forms-input" placeholder="Password" id="password_login"
+                  name="password_login" required>
                 <label for="password_login" class="forms-label">Password</label>
               </div>
               <button class="butn butn-orange butn-animated" type="submit">login</button>
@@ -169,8 +174,8 @@
               </div>
 
               <div class="forms-group">
-                <input type="text" class="forms-input" placeholder="Mobile Number" id="mobile_register" name="mobile_register"
-                  pattern="[6789][0-9]{9}" required>
+                <input type="text" class="forms-input" placeholder="Mobile Number" id="mobile_register"
+                  name="mobile_register" pattern="[6789][0-9]{9}" required>
                 <label for="mobile_register" class="forms-label">Moblie Number</label>
               </div>
 
@@ -181,8 +186,8 @@
               </div> -->
 
               <div class="forms-group">
-                <input type="password" class="forms-input" placeholder="password" id="password_register" name="password_register"
-                  required>
+                <input type="password" class="forms-input" placeholder="password" id="password_register"
+                  name="password_register" required>
                 <label for="password_register" class="forms-label">password</label>
               </div>
 
@@ -215,5 +220,17 @@
   password.onchange = validatePassword;
   confirmPassword.onkeyup = validatePassword;
 </script>
+
+
+{{!-- <script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+  }
+</script>
+
+{{!-- <script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
 
 </html>
