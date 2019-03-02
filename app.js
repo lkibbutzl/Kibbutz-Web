@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const engines = require('consolidate');
 const userRouter = require("./routes/user.js")
 const newsRouter = require("./routes/news.js")
+const queriesRouter = require("./routes/queries.js")
 const exphbs = require('express-handlebars');
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(userRouter)
 app.use(newsRouter)
+app.use(queriesRouter)
 
 const PORT = process.env.PORT || 4000
 

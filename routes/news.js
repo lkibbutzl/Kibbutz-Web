@@ -27,11 +27,5 @@ router.get('/news', (req, res) => {
   })
 })
 
-// var obj = JSON.parse(response)
-// obj.articles[0].title
-// obj.articles[0].description
-// https://newsapi.org/v2/everything?sources=the-times-of-india&apiKey=066d9529cb5141b681d9b6c3a6363be5
-
-
 
 module.exports = router

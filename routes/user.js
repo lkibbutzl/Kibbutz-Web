@@ -102,12 +102,12 @@ router.post('/register', (req, res) => {
         const queryString = "INSERT INTO users (name, mobile, password) VALUES (?,?,?)"
         connection.query(queryString, [name, number, password], (err, results, fields) => {
           if (err) {
-            console.log("Failed adding an user" + err);
+            console.log("Failed adding an user " + err);
             res.send(500)
             return
           }
           console.log("Inserted a new user: ", results.insertId);
-          console.log("Hash Check: ", bcrypt.compareSync(password, hash))
+          // console.log("Hash Check: ", bcrypt.compareSync(password, hash))
           res.render("./success-fail.hbs", {
             message: "Registered successfully",
             button: "Home",
