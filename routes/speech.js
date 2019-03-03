@@ -3,20 +3,22 @@ try {
   var recognition = new SpeechRecognition();
 } catch (e) {
   console.error(e);
-  $('.no-browser-support').show();
-  $('.app').hide();
+  // $('.no-browser-support').show();
+  // $('.app').hide();
 }
 
 
-var noteTextarea = $('#note-textarea');
+var titleTextarea = $('#title_query');
+var contentTextarea = $('#content_query');
 var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
 
-var noteContent = '';
+var title = '';
+var content = ''
 
 // Get all notes from previous sessions and display them.
-var notes = getAllNotes();
-renderNotes(notes);
+// var notes = getAllNotes();
+// renderNotes(notes);
 
 
 
@@ -46,8 +48,8 @@ recognition.onresult = function (event) {
   var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 
   if (!mobileRepeatBug) {
-    noteContent += transcript;
-    noteTextarea.val(noteContent);
+    title += transcript;
+    titleTextarea.val(title);
   }
 };
 
@@ -71,7 +73,16 @@ recognition.onerror = function (event) {
       App buttons and input 
 ------------------------------*/
 
-$('#start-record-btn').on('click', function (e) {
+
+/**
+ * start-record-title
+ * pause-record-title
+ * start-record-content
+ * pause-record-content
+ */
+
+
+$('#start-record-title').on('click', function (e) {
   if (noteContent.length) {
     noteContent += ' ';
   }
@@ -79,10 +90,25 @@ $('#start-record-btn').on('click', function (e) {
 });
 
 
-$('#pause-record-btn').on('click', function (e) {
+$('#pause-record-title').on('click', function (e) {
   recognition.stop();
   instructions.text('Voice recognition paused.');
 });
+
+
+$('#start-record-content').on('click', function (e) {
+  if (noteContent.length) {
+    noteContent += ' ';
+  }
+  recognition.start();
+});
+
+
+$('#pause-record-content').on('click', function (e) {
+  recognition.stop();
+  instructions.text('Voice recognition paused.');
+});
+
 
 // Sync the text inside the text area with the noteContent variable.
 noteTextarea.on('input', function () {

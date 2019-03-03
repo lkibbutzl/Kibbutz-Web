@@ -74,9 +74,9 @@
             <li class="foot-item">
               <a href="/news" class="foot-link">News</a>
             </li>
-            <li class="foot-item">
+            {{!-- <li class="foot-item">
               <a href="/queries" class="foot-link">Forums</a>
-            </li>
+            </li> --}}
             <li class="foot-item">
               <a href="#" class="foot-link">About Us</a>
             </li>
@@ -127,15 +127,19 @@
               </div>
 
               <div class="forms-group">
-                <textarea class="forms-input" placeholder="Title of the query" id="title_query" name="title_query"
-                  required></textarea>
+                <textarea class="forms-input" placeholder="Title of the query" id="title_query"
+                  name="title_query"></textarea>
                 <label for="title_query" class="forms-label">Title</label>
+                <button id="start-record-title">Start</button>
+                <button id="pause-record-title">Pause</button>
               </div>
 
               <div class="forms-group">
                 <textarea type="password" class="forms-input" placeholder="Content of the query" id="content_query"
-                  name="content_query" required></textarea>
+                  name="content_query"></textarea>
                 <label for="content_query" class="forms-label">Content</label>
+                <button id="start-record-content">Start</button>
+                <button id="pause-record-content">Pause</button>
               </div>
               <button type="submit" class="butn butn-animated butn-orange">Add Query</button>
             </form>

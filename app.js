@@ -2,6 +2,9 @@ const express = require('express')
 const morgan = require('morgan')
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
+const {
+  PythonShell
+} = require('python-shell')
 const engines = require('consolidate');
 const userRouter = require("./routes/user.js")
 const newsRouter = require("./routes/news.js")
@@ -33,6 +36,19 @@ app.listen(PORT, () => {
   console.log('Server listening at port ' + PORT)
 })
 
+
+let options = {
+  mode: 'text',
+  pythonOptions: ['-u'], // get print results in real-time
+  args: ['value1', 'value2', 'value3']
+};
+
+PythonShell.run('kibbutz-predict/crop_diseases.py', options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+
+  console.log('results: %j', results);
+});
 
 app.get('/', (req, res) => {
   console.log("Root Route")
