@@ -18,7 +18,7 @@
   <main>
     <nav>
       <div class="navbar navbar-fixed green nav-wrapper">
-        <a href="/news" class="brand-logo">&#160;&#160;Forum</a>
+        <a href="/news" class="brand-logo">&#160;&#160;Disease</a>
         <!-- <ul id="nav-mobile" class="left">
           <li>
             <h3>&#160;&#160;News</h3>
@@ -38,26 +38,15 @@
       </div>
     </nav>
 
+    <center>
+      <input type="file" name="image_input" id="image_input">
+    </center>
 
     <div id="ytWidget"></div>
     <script
       src="https://translate.yandex.net/website-widget/v1/widget.js?widgetId=ytWidget&pageLang=en&widgetTheme=light&autoMode=false"
       type="text/javascript"></script>
-    <ul class="collection">
-      {{#each result}}
-      <li class="collection-item avatar">
-        <h2 style="margin-top:0%">{{this.title}}</h2>
-        <h5>{{this.content}}</h5>
-        <hr>
-        <p><i>By: {{this.user}}</i></p>
-        <p><i>Crop: {{this.crop}}</i></p>
-      </li>
-      {{/each}}
-    </ul>
 
-
-    <center><a style="margin:1%" href="#addQuery" class="butn butn-orange butn-animated">Add Query</a></center>
-    </div>
 
   </main>
   <footer class="foot">
@@ -70,9 +59,6 @@
           <ul class="foot-list">
             <li class="foot-item">
               <a href="/" class="foot-link">Home</a>
-            </li>
-            <li class="foot-item">
-              <a href="/news" class="foot-link">News</a>
             </li>
             <li class="foot-item">
               <a href="/queries" class="foot-link">Forums</a>
@@ -102,48 +88,6 @@
       </div>
     </div>
   </footer>
-  <div class="popup" id="addQuery">
-    <div class="popup-content">
-      <div class="row">
-        <div class="query">
-          <div class="register-form">
-            <form action="/callDeepLearning" method="POST" class="forms" enctype="multipart/form-data">
-              <div class="u-center-text">
-                <h2 class="heading-secondary">
-                  Add Query
-                </h2>
-              </div>
-              <div class="forms-group">
-                <a href="#header" class="popup-close">&times;</a>
-                <input type="text" class="forms-input" placeholder="Name (For Display)" id="name_query"
-                  name="name_query" required>
-                <label for="name_query" class="forms-label">Name</label>
-              </div>
-
-              <div class="forms-group">
-                <input type="text" class="forms-input" placeholder="Crop" id="crop_query" name="crop_query" required>
-                <input type="file" name="file-to-upload">
-                <label for="crop_query" class="forms-label">Crop</label>
-              </div>
-
-              <div class="forms-group">
-                <textarea class="forms-input" placeholder="Title of the query" id="title_query" name="title_query"
-                  required></textarea>
-                <label for="title_query" class="forms-label">Title</label>
-              </div>
-
-              <div class="forms-group">
-                <textarea type="password" class="forms-input" placeholder="Content of the query" id="content_query"
-                  name="content_query" required></textarea>
-                <label for="content_query" class="forms-label">Content</label>
-              </div>
-              <button type="submit" class="butn butn-animated butn-orange">Add Query</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 
 </html>

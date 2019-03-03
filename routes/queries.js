@@ -1,6 +1,22 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
+const {
+  PythonShell
+} = require('python-shell')
+const multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '/Users/sudhakarmani/tnplpocs/facer/kibbutz-predict/input-images')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
+});
+var upload = multer({
+  storage: storage
+});
 
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -25,6 +41,28 @@ router.get('/queries', (req, res) => {
   })
 })
 
+router.post('/callDeepLearning', upload.single('file-to-upload'), (req, res) => {
+
+  const filename = req.body.name_query
+  const crop = req.body.crop_query
+  console.log("file details " + req)
+
+  let options = {
+    mode: 'text',
+    pythonOptions: ['-u'], // get print results in real-time
+    args: ['--image=' + filename, '--cropname=' + crop]
+  };
+
+  PythonShell.run('../kibbutz-predict/crop_diseases.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
+  });
+
+
+
+})
+
 router.post('/addQuery', (req, res) => {
   const user = req.body.name_query
   const crop = req.body.crop_query
@@ -34,7 +72,7 @@ router.post('/addQuery', (req, res) => {
 
   const postQuery = "INSERT INTO queries (user, crop, title, content) VALUES (?,?,?,?)"
 
-  connection.query(postQuery, ["user", crop, title, content], (err, results, fields) => {
+  connection.query(postQuery, [user, crop, title, content], (err, results, fields) => {
     if (err) {
       console.log("Failed adding the Post " + err);
       res.send(500);

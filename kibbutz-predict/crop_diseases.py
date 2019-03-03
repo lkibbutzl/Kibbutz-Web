@@ -1,3 +1,5 @@
+# USAGE
+# python crop-diseases.py --cropname sunflower --image images/crop.jpg
 # Import the libraries
 import numpy as np
 import pandas as pd
@@ -5,22 +7,34 @@ import matplotlib.pyplot as plt
 import os
 import cv2
 import random
+import argparse
 
+# construct the argument parser and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required=True,
+	help="path to input image")
+ap.add_argument("-d", "--cropname", required=True,
+	help="enter the cropname")
+args = vars(ap.parse_args())
 
-DATADIR = "/home/rahul/Desktop/kibbutz-predict/datasets"
+print ("Image Path "+args["image"])
+print ("Crop Name "+args["cropname"])
+
+INPUTDIR = "/home/rahul/Desktop/Kibbutz-Web/kibbutz-predict/input-images"
+DATADIR = "/home/rahul/Desktop/Kibbutz-Web/kibbutz-predict/datasets"
 CATEGORIES = ["leaf-mold", "yellow-leaf-curl-virus"]
 
 for category in CATEGORIES:
     path = os.path.join(DATADIR, category)
-    
+
     for img in os.listdir(path):
         img_arr = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
         plt.imshow(img_arr, cmap="gray")
         plt.show()
         break
     break
-    
-# print(img_arr) 
+
+# print(img_arr)
 
 IMG_SIZE = 150
 
@@ -31,7 +45,7 @@ plt.show()
 
 # In[4]:
 
-
+'''
 train_data = []
 
 def create_train_data():
@@ -46,7 +60,7 @@ def create_train_data():
                 train_data.append([new_arr, class_num])
             except Exception as e:
                 pass
-            
+
 
 create_train_data()
 
@@ -60,8 +74,8 @@ y = []
 for features, labels in train_data:
     X.append(features)
     y.append(labels)
-    
-    
+
+
 X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 
 
@@ -92,3 +106,4 @@ model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=
 
 
 model.fit(X, y, batch_size=10, epochs=3, validation_split=0.1)
+'''

@@ -37,18 +37,18 @@ app.listen(PORT, () => {
 })
 
 
-let options = {
-  mode: 'text',
-  pythonOptions: ['-u'], // get print results in real-time
-  args: ['value1', 'value2', 'value3']
-};
+// let options = {
+//   mode: 'text',
+//   pythonOptions: ['-u'], // get print results in real-time
+//   args: ['value1', 'value2', 'value3']
+// };
 
-PythonShell.run('kibbutz-predict/crop_diseases.py', options, function (err, results) {
-  if (err) throw err;
-  // results is an array consisting of messages collected during execution
+// PythonShell.run('kibbutz-predict/crop_diseases.py', options, function (err, results) {
+//   if (err) throw err;
+//   // results is an array consisting of messages collected during execution
 
-  console.log('results: %j', results);
-});
+//   console.log('results: %j', results);
+// });
 
 app.get('/', (req, res) => {
   console.log("Root Route")
