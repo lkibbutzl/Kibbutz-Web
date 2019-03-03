@@ -34,7 +34,7 @@ router.post('/addQuery', (req, res) => {
 
   const postQuery = "INSERT INTO queries (user, crop, title, content) VALUES (?,?,?,?)"
 
-  connection.query(postQuery, [user, crop, title, content], (err, results, fields) => {
+  connection.query(postQuery, ["user", crop, title, content], (err, results, fields) => {
     if (err) {
       console.log("Failed adding the Post " + err);
       res.send(500);
