@@ -1,2 +1,0 @@
-# KIBBUTZ
-Kibbutz is an application that decreases the gap between the agricultural officers and Farmers, using is the magical powers of the Internet. This is a project that was built during the __Smart India Hackathon (SIH)__ in contract with MAHYCO (An agricultural company) held on __2nd and 3rd of March__ for 36 hrs straight. I am planning to complete this application and host it for production. It needs quite a lot of work to be done. I hope I will complete it before the end of this year. This is an __Open-source__ project, so any contribution is appreciated.
